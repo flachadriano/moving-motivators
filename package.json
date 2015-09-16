@@ -1,0 +1,27 @@
+{
+  "name": "moving-motivators",
+  "version": "0.0.1",
+  "description": "Moving Motivators Drag & Drop",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ejs": "2.3.3",
+    "express": "4.13.3"
+  },
+  "engines": {
+    "node": "0.12.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morzzz007/moving-motivators"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "scrum"
+  ],
+  "license": "MIT"
+}
