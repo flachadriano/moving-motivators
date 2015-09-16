@@ -5,6 +5,9 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
 
+// TODO: use react.min.js in production
+app.use('/react', express.static(__dirname + '/node_modules/react/dist/react.js'));
+
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
