@@ -1,0 +1,132 @@
+html, body, .viewport {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Bitter', sans-serif;
+    background-image: url('http://40.media.tumblr.com/3f03fc4877fa4ff0d2798a611caa8c3e/tumblr_n8qpgwZu1G1tczf5ro1_500.png');
+}
+
+.react-container {
+    height: 100%;
+    width: 100%;
+}
+
+.backdrop {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.0);
+    transition: background-color 0.3s linear;
+}
+
+.backdrop.active {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.outer-container {
+  min-height: 100%;
+  display: flex;
+  width: 100%;
+}
+
+.inner-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.column-1, .column-3 {
+  background-color: grey;
+  flex-basis: 40px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  align-content: center;
+  text-align: center;
+}
+
+.column-2 {
+  display: flex;
+  flex-direction: column;
+  
+  .inside {
+    flex: 1;
+    
+    &.inside-up {
+      flex-grow: 5;
+      background-color: rgba(255,0,0,.3);
+    }    
+    
+    &.inside-down {
+      background-color: rgba(0,0,255,.3);
+      flex-grow: 5;
+    }
+    
+    &.inside-img {
+      flex-grow: 0;
+    }
+  }
+}
+
+.col-image {
+  width: 100%;
+}
+.image-card-title {
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.image-card-desc {
+    position: absolute;
+    bottom: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    height: 30px;
+    font-size: 6px;
+    text-align: center;
+}
+
+/* modal */
+.modal-content {
+     -webkit-box-shadow: none;
+     box-shadow: none;
+}
+
+.modal-header {
+    text-align: center;
+    font-weight: 700;
+    border-bottom: none;
+}
+
+.modal-title {
+    text-transform: uppercase;
+}
+
+.modal-body p {
+    padding-top: 15px;
+    font-weight: 700;
+
+}
+
+@media (min-width: 768px){
+    .modal-sm {
+        width: 350px;
+    }
+}
