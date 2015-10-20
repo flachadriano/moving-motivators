@@ -1,3 +1,5 @@
+const React = require('react');
+
 module.exports = React.createClass({
   propTypes: {
     cardIndex: React.PropTypes.number,
@@ -11,7 +13,7 @@ module.exports = React.createClass({
     return (
       <div className="column column-2">
         <div className="inside inside-up">UP</div>
-        <img className="inside inside-img col-image" src={ 'card/' + this.props.imageUrl} onClick={this.onClick}/>
+        <img className="inside inside-img col-image" src={'card/' + this.props.imageUrl} onClick={this.onClick}/>
         <div className="inside inside-down">DOWN</div>
       </div>
       );

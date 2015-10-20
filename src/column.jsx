@@ -1,3 +1,4 @@
+const React = require('react');
 const Card = require('./card.jsx');
 
 module.exports = React.createClass({
@@ -17,9 +18,9 @@ module.exports = React.createClass({
     return (
       <div className="inner-container">
         <div className="column column-1" onClick={this.onUpClick}>1</div>
-        <Card cardIndex={this.props.cardIndex} imageUrl={this.props.imageUrl} onSelect={this.props.onSelect}/>
+        <Card cardIndex={this.props.cardIndex} imageUrl={this.props.imageUrl} onSelect={this.props.onSelect} key={this.props.cardIndex}/>
         <div className="column column-3" onClick={this.onDownClick}>3</div>
       </div>
-      );
+    );
   },
 });
