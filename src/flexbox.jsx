@@ -27,7 +27,7 @@ module.exports = React.createClass({
   render() {
     const cardNodes = this.props.cards.map((card, key) => {
       return React.createElement(Column,
-        { key, imageUrl: card.imageUrl, onSelect: this.cardSelected, cardIndex: key, onScrollClick: this.onScrollClick });
+        { key, priority: card.priority, imageUrl: card.imageUrl, onSelect: this.cardSelected, cardIndex: key, onScrollClick: this.onScrollClick });
     });
 
     return (
