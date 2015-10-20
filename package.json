@@ -17,9 +17,7 @@
     "express": "4.13.3",
     "gulp": "^3.9.0",
     "gulp-less": "^3.0.3",
-    "react": "^0.13.3"
-  },
-  "devDependencies": {
+    "react": "^0.13.3",
     "react-dragula": "^1.0.12"
   },
   "engines": {
