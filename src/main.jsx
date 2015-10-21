@@ -5,6 +5,7 @@ import Flexbox from './flexbox.jsx';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import motivatorsApp from './store/reducers';
+import { motivatorDrag } from './store/actions';
 
 const cards = [
   { imageUrl: 'Acceptance.png', name: 'Elfogadás', description: 'Motivál, hogy a körülöttem lévő emberek elfogadnak olyannak, amilyen vagyok, és megerősítenek abban, amit csinálok.'},
@@ -46,7 +47,8 @@ const App = React.createClass({
     }).on('drop', function(el, target, source, sibling) {
       const startIndex = el.getAttribute('data-reactid').split('$')[1];
       const endIndex = sibling.getAttribute('data-reactid').split('$')[1];
-      console.log('drop', startIndex, endIndex);
+      console.log('drop', startIndex, endIndex - 1);
+      store.dispatch(motivatorDrag(startIndex, endIndex - 1));
     });
   },
   render: function() {
