@@ -1,5 +1,5 @@
-const React = require('react');
-const Card = require('./card.jsx');
+import React from 'react';
+import Card from './card.jsx';
 
 module.exports = React.createClass({
   propTypes: {

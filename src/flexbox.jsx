@@ -1,10 +1,13 @@
-const React = require('react');
-const Column = require('./column.jsx');
-const Modal = require('./modal.jsx');
+import React from 'react';
+import Column from './column.jsx';
+import { connect } from 'react-redux';
+import { increaseMotivatorPriority, decreaseMotivatorPriority } from './store/actions';
+// const Modal = require('./modal.jsx');
 
-module.exports = React.createClass({
+let App = React.createClass({
   propTypes: {
-    cards: React.PropTypes.array
+    state: React.PropTypes.object,
+    dispatch: React.PropTypes.func,
   },
   getInitialState() {
     return {
@@ -14,20 +17,22 @@ module.exports = React.createClass({
     };
   },
   onScrollClick(direction, cardIndex) {
-    console.log('onScrollClick', direction, cardIndex);
+    const { dispatch } = this.props;
+    if (direction === 'up') dispatch(increaseMotivatorPriority(cardIndex));
+    if (direction === 'down') dispatch(decreaseMotivatorPriority(cardIndex));
   },
   cardSelected(cardIndex) {
     this.setState({
-      title: this.props.cards[cardIndex].name,
-      imageUrl: this.props.cards[cardIndex].imageUrl,
-      description: this.props.cards[cardIndex].description,
+      title: this.props.state.cards[cardIndex].name,
+      imageUrl: this.props.state.cards[cardIndex].imageUrl,
+      description: this.props.state.cards[cardIndex].description,
     });
     // $('#myModal').modal();
   },
   render() {
-    const cardNodes = this.props.cards.map((card, key) => {
+    const cardNodes = this.props.state.motivators.map((motivator, key) => {
       return React.createElement(Column,
-        { key, priority: card.priority, imageUrl: card.imageUrl, onSelect: this.cardSelected, cardIndex: key, onScrollClick: this.onScrollClick });
+        { key, priority: motivator.priority, imageUrl: this.props.state.cards[key].imageUrl, onSelect: this.cardSelected, cardIndex: key, onScrollClick: this.onScrollClick });
     });
 
     return (
@@ -35,8 +40,16 @@ module.exports = React.createClass({
         {cardNodes}
       </div>
       );
-  },
+  }
 });
+
+function select(state) {
+  return {
+    state
+  };
+}
+
+export default connect(select)(App);
 
 // <Modal title={this.state.title} imageUrl={this.state.imageUrl} description={this.state.description}/>
 

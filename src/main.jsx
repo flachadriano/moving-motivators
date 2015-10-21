@@ -1,47 +1,61 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-
-const Flexbox = require('./flexbox.jsx');
-const dragula = require('react-dragula');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import dragula from 'react-dragula';
+import Flexbox from './flexbox.jsx';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import motivatorsApp from './store/reducers';
 
 const cards = [
-  { priority: 4, imageUrl: 'Acceptance.png', name: 'Elfogadás', description: 'Motivál, hogy a körülöttem lévő emberek elfogadnak olyannak, amilyen vagyok, és megerősítenek abban, amit csinálok.'},
-  { priority: 3, imageUrl: 'Curiosity.png', name: 'Kíváncsiság', description: 'Motivál, hogy bár vannak monoton, esetleg unalmas feladatok, számos más dolog van, amit felfedezhetek és amin gondolkodhatok.'},
-  { priority: 2, imageUrl: 'Freedom.png', name: 'Szabadság', description: 'Motivál, hogy független vagyok a többiektől, megvannak a saját feladataim és felelősségem.'},
-  { priority: 1, imageUrl: 'Goal.png', name: 'Cél', description: 'Motivál, hogy nem csupán pénzt keresek, hanem a munkámban visszatükröződnek a személyes (élet)céljaim is. Például munkámmal hozzájárulok ahhoz, hogy a világ (kicsit) jobb legyen.'},
-  { priority: 0, imageUrl: 'Honor.png', name: 'Megbecsülés', description: 'Motivál, hogy a személyes értékrendem megjelenik a csapat / szervezet alkotta szabályokban, ezért örömmel tartom be őket, lojális vagyok hozzájuk.'},
-  { priority: -1, imageUrl: 'Mastery.png', name: 'Szakmai kiválóság', description: 'Motivál, hogy a munkám olyan kihívások elé állít, amelyek próbára teszik a szaktudásomat, de képességeimnek megfelelőek (nem érzem lehetetlennek a megoldásukat).'},
-  { priority: -2, imageUrl: 'Order.png', name: 'Rend', description: 'Motivál, hogy a szervezetben elegendő előírás, szabályozás és irányelv van ahhoz, hogy kiszámítható, stabil munkakörnyezetben dolgozhassak.'},
-  { priority: -3, imageUrl: 'Power.png', name: 'Hatalom', description: 'Motivál, hogy lehetőségem van befolyásolni az eseményeket, amik körülöttem történnek.'},
-  { priority: -4, imageUrl: 'Relatedness.png', name: 'Kötődés', description: 'Motivál, hogy a körülöttem lévő emberekkel jó kapcsolatot ápolok, és a közeli ismeretségek kialakulását a céges környezet is támogatja.'},
-  { priority: 0, imageUrl: 'Status.png', name: 'Státusz', description: 'Motivál, hogy a szervezeti hierarchiában jó pozícióban vagyok, és ezt a velem dolgozók is elismerik.'},
+  { imageUrl: 'Acceptance.png', name: 'Elfogadás', description: 'Motivál, hogy a körülöttem lévő emberek elfogadnak olyannak, amilyen vagyok, és megerősítenek abban, amit csinálok.'},
+  { imageUrl: 'Curiosity.png', name: 'Kíváncsiság', description: 'Motivál, hogy bár vannak monoton, esetleg unalmas feladatok, számos más dolog van, amit felfedezhetek és amin gondolkodhatok.'},
+  { imageUrl: 'Freedom.png', name: 'Szabadság', description: 'Motivál, hogy független vagyok a többiektől, megvannak a saját feladataim és felelősségem.'},
+  { imageUrl: 'Goal.png', name: 'Cél', description: 'Motivál, hogy nem csupán pénzt keresek, hanem a munkámban visszatükröződnek a személyes (élet)céljaim is. Például munkámmal hozzájárulok ahhoz, hogy a világ (kicsit) jobb legyen.'},
+  { imageUrl: 'Honor.png', name: 'Megbecsülés', description: 'Motivál, hogy a személyes értékrendem megjelenik a csapat / szervezet alkotta szabályokban, ezért örömmel tartom be őket, lojális vagyok hozzájuk.'},
+  { imageUrl: 'Mastery.png', name: 'Szakmai kiválóság', description: 'Motivál, hogy a munkám olyan kihívások elé állít, amelyek próbára teszik a szaktudásomat, de képességeimnek megfelelőek (nem érzem lehetetlennek a megoldásukat).'},
+  { imageUrl: 'Order.png', name: 'Rend', description: 'Motivál, hogy a szervezetben elegendő előírás, szabályozás és irányelv van ahhoz, hogy kiszámítható, stabil munkakörnyezetben dolgozhassak.'},
+  { imageUrl: 'Power.png', name: 'Hatalom', description: 'Motivál, hogy lehetőségem van befolyásolni az eseményeket, amik körülöttem történnek.'},
+  { imageUrl: 'Relatedness.png', name: 'Kötődés', description: 'Motivál, hogy a körülöttem lévő emberekkel jó kapcsolatot ápolok, és a közeli ismeretségek kialakulását a céges környezet is támogatja.'},
+  { imageUrl: 'Status.png', name: 'Státusz', description: 'Motivál, hogy a szervezeti hierarchiában jó pozícióban vagyok, és ezt a velem dolgozók is elismerik.'},
 ];
+
+const motivators = [
+  { id: 0, priority: 4 },
+  { id: 1, priority: 3 },
+  { id: 2, priority: 2 },
+  { id: 3, priority: 1 },
+  { id: 4, priority: 0 },
+  { id: 5, priority: -1 },
+  { id: 6, priority: -2 },
+  { id: 7, priority: -3 },
+  { id: 8, priority: -4 },
+  { id: 9, priority: 0 },
+];
+
+const storeMotivators = {
+  cards,
+  motivators
+};
+
+const store = createStore(motivatorsApp, storeMotivators);
 
 const App = React.createClass({
   componentDidMount: function() {
     dragula([document.querySelector('.outer-container')], {
       direction: 'horizontal',
+    }).on('drop', function(el, target, source, sibling) {
+      const startIndex = el.getAttribute('data-reactid').split('$')[1];
+      const endIndex = sibling.getAttribute('data-reactid').split('$')[1];
+      console.log('drop', startIndex, endIndex);
     });
   },
   render: function() {
-    return <Flexbox cards={cards}/>;
+    return <Provider store={store}>
+      <Flexbox/>
+      </Provider>;
   },
 });
 
 ReactDOM.render(<App />, document.getElementById('reactHere'));
 
 // var zoomed;
-
-// $('.image-up').on('click', function(event) {
-//     var up = parseFloat($(event.currentTarget).parent().children('.image-up').css('flex-grow'));
-//     var down = parseFloat($(event.currentTarget).parent().children('.image-down').css('flex-grow'));
-//     $(event.currentTarget).parent().children('.image-up').css('flex-grow', up - 0.1);
-//     $(event.currentTarget).parent().children('.image-down').css('flex-grow', down + 0.1);
-// })
-
-// $('.image-down').on('click', function(event) {
-//     var up = parseFloat($(event.currentTarget).parent().children('.image-up').css('flex-grow'));
-//     var down = parseFloat($(event.currentTarget).parent().children('.image-down').css('flex-grow'));
-//     $(event.currentTarget).parent().children('.image-up').css('flex-grow', up + 0.1);
-//     $(event.currentTarget).parent().children('.image-down').css('flex-grow', down - 0.1);
-// });

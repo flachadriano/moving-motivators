@@ -19,7 +19,9 @@
     "gulp-less": "^3.0.3",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-dragula": "^1.0.12"
+    "react-dragula": "^1.0.12",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.2"
   },
   "engines": {
     "node": "0.12.7"
@@ -36,6 +38,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "redux-devtools": "^2.1.5",
     "webpack-dev-server": "^1.12.1"
   }
 }
