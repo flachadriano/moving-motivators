@@ -8,7 +8,7 @@ gulp.task('less_moving_motivators', function() {
 });
 
 gulp.task('watch_moving_motivators', function() {
-  gulp.watch('less/**/*.less', ['less_moving_motivators']);
+  gulp.watch('styles/**/*.less', ['less_moving_motivators']);
 });
 
 gulp.task('watch', ['less_moving_motivators', 'watch_moving_motivators']);

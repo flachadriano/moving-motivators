@@ -4,12 +4,32 @@ html, body, .viewport {
     width: 100%;
     height: 100%;
     font-family: 'Bitter', sans-serif;
-    background-image: url('https://40.media.tumblr.com/3f03fc4877fa4ff0d2798a611caa8c3e/tumblr_n8qpgwZu1G1tczf5ro1_500.png');
+    background: #1d1e21;
+    // background-image: url('https://40.media.tumblr.com/3f03fc4877fa4ff0d2798a611caa8c3e/tumblr_n8qpgwZu1G1tczf5ro1_500.png');
+    color: #cecece;
+    // -webkit-font-smoothing: antialiased;
+    // -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+}
+
+.pages-container {
+  width: 100%;
+  height: 100%;
 }
 
 .react-container {
     height: 100%;
     width: 100%;
+    transition: all 0.45s;
+    -webkit-transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+    transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+    background-color: #2a2b30;
+
+    &.open {
+      transform: translate3d(0px, 50%, -200px) scale(.8);
+      box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+      opacity: .9;
+    }
 }
 
 .backdrop {
@@ -51,7 +71,7 @@ html, body, .viewport {
 }
 
 .column-1, .column-3 {
-  background-color: grey;
+  // background-color: grey;
   flex-basis: 40px;
   flex-grow: 0;
   flex-shrink: 0;
@@ -62,22 +82,31 @@ html, body, .viewport {
 .column-2 {
   display: flex;
   flex-direction: column;
-  
+  padding-left: 10px;
+  padding-right: 10px;
+
   .inside {
     flex: 1;
-    
+
     &.inside-up {
       flex-grow: 5;
-      background-color: rgba(255,0,0,.3);
-    }    
-    
+      // background-color: rgba(255,0,0,.3);
+    }
+
     &.inside-down {
-      background-color: rgba(0,0,255,.3);
+      // background-color: rgba(0,0,255,.3);
       flex-grow: 5;
     }
-    
+
     &.inside-img {
       flex-grow: 0;
+      border-radius: 2px;
+      // transform: scale(.8);
+      transition: all 0.3s linear;
+
+      &:hover {
+        // transform: scale(1);
+      }
     }
   }
 }

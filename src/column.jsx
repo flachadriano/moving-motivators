@@ -18,9 +18,13 @@ module.exports = React.createClass({
   render() {
     return (
       <div className="inner-container">
-        <div className="column column-1" onClick={this.onUpClick}>1</div>
+        <div className="column column-1" onClick={this.onUpClick}>
+          <i className="fa fa-arrow-up"></i>
+        </div>
         <Card priority={this.props.priority} cardIndex={this.props.cardIndex} imageUrl={this.props.imageUrl} onSelect={this.props.onSelect} key={this.props.cardIndex}/>
-        <div className="column column-3" onClick={this.onDownClick}>3</div>
+        <div className="column column-3" onClick={this.onDownClick}>
+          <i className="fa fa-arrow-down"></i>
+        </div>
       </div>
     );
   },
