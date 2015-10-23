@@ -5,7 +5,7 @@ import Flexbox from './flexbox.jsx';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import motivatorsApp from './store/reducers';
-import { motivatorDrag } from './store/actions';
+import { motivatorOrderModified } from './store/actions';
 
 const cards = [
   { imageUrl: 'Acceptance.png', name: 'Elfogadás', description: 'Motivál, hogy a körülöttem lévő emberek elfogadnak olyannak, amilyen vagyok, és megerősítenek abban, amit csinálok.'},
@@ -45,10 +45,13 @@ const App = React.createClass({
     dragula([document.querySelector('.cards-outer-container')], {
       direction: 'horizontal',
     }).on('drop', function(el, target, source, sibling) {
-      const startIndex = el.getAttribute('data-reactid').split('$')[1];
-      const endIndex = sibling.getAttribute('data-reactid').split('$')[1];
-      console.log('drop', startIndex, endIndex - 1);
-      store.dispatch(motivatorDrag(startIndex, endIndex - 1));
+      const x = document.getElementsByClassName('column-2');
+      const modifiedOrder = [];
+      for (let i = 0; i < 10; i++) {
+        modifiedOrder.push(parseInt(x[i].getAttribute('data-reactid').split('$')[1].split('.')[0], 10));
+      }
+      this.cancel(true);
+      store.dispatch(motivatorOrderModified(modifiedOrder));
     });
   },
   render: function() {

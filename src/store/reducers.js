@@ -1,33 +1,29 @@
-import { INCREASE_PRIORITY, DECREASE_PRIORITY, MOTIVATOR_DRAG } from './actions';
+import { INCREASE_PRIORITY, DECREASE_PRIORITY, ORDER_MODIFIED } from './actions';
 
-function getNewMotivators(previousMotivators, index, amount) {
-  return [
-    ...previousMotivators.slice(0, index),
-    { ... previousMotivators[index], priority: previousMotivators[index].priority + amount},
-    ...previousMotivators.slice(index + 1)
-  ];
+function modifyPriority(previousMotivators, id, amount) {
+  const newMotivators = [...previousMotivators];
+  const selectedMotivator = newMotivators.find(m => m.id === id);
+  if (selectedMotivator.priority + amount <= 1 && selectedMotivator.priority + amount >= -1) selectedMotivator.priority += amount;
+  return newMotivators;
 }
 
-function moveMotivators(previousMotivators, oldIndex, newIndex) {
-  const result = [ ...previousMotivators ];
-  result.splice(newIndex, 0, result.splice(oldIndex, 1)[0]);
-  console.log('result', result);
-
+function moveMotivators(previousMotivators, modifiedOrder) {
+  const result = [];
+  for (let i = 0; i < 10; i++) {
+    const found = previousMotivators.find(m => m.id === modifiedOrder[i]);
+    result.push(found);
+  }
   return result;
 }
 
 function motivators(state = {}, action) {
   switch (action.type) {
   case INCREASE_PRIORITY:
-    if (state.motivators[action.motivatorIndex].priority + 1 > 1) return state;
-    return {...state, motivators: getNewMotivators(state.motivators, action.motivatorIndex, 1)};
+    return {...state, motivators: modifyPriority(state.motivators, action.motivatorId, 1)};
   case DECREASE_PRIORITY:
-    if (state.motivators[action.motivatorIndex].priority - 1 < -1) return state;
-    return {...state, motivators: getNewMotivators(state.motivators, action.motivatorIndex, -1)};
-  case MOTIVATOR_DRAG:
-    console.log('motivator drag', state, action);
-    moveMotivators(state.motivators, action.motivatorIndex, action.positionIndex);
-    return {...state };
+    return {...state, motivators: modifyPriority(state.motivators, action.motivatorId, -1)};
+  case ORDER_MODIFIED:
+    return {...state, motivators: moveMotivators(state.motivators, action.modifiedOrder) };
   default:
     return state;
   }

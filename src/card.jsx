@@ -2,13 +2,13 @@ import React from 'react';
 
 module.exports = React.createClass({
   propTypes: {
-    cardIndex: React.PropTypes.number,
+    cardId: React.PropTypes.number,
     imageUrl: React.PropTypes.string,
     onSelect: React.PropTypes.func,
     priority: React.PropTypes.number,
   },
   onClick() {
-    this.props.onSelect(this.props.cardIndex);
+    this.props.onSelect(this.props.cardId);
   },
   calculatePriorityStyle(place) {
     switch (place) {
