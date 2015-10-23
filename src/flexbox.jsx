@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 import { increaseMotivatorPriority, decreaseMotivatorPriority } from './store/actions';
 // const Modal = require('./modal.jsx');
 
-let App = React.createClass({
+const App = React.createClass({
   propTypes: {
     state: React.PropTypes.object,
     dispatch: React.PropTypes.func,
   },
   getInitialState() {
     return {
-      title: '',
-      imageUrl: '',
-      description: '',
+      title: this.props.state.cards[0].name,
+      imageUrl: this.props.state.cards[0].imageUrl,
+      description: this.props.state.cards[0].description,
     };
   },
   onScrollClick(direction, cardIndex) {
@@ -27,7 +27,6 @@ let App = React.createClass({
       imageUrl: this.props.state.cards[cardIndex].imageUrl,
       description: this.props.state.cards[cardIndex].description,
     });
-    // $('#myModal').modal();
   },
   render() {
     const cardNodes = this.props.state.motivators.map((motivator, key) => {
@@ -37,7 +36,20 @@ let App = React.createClass({
 
     return (
       <div className="outer-container">
-        {cardNodes}
+        <div className="detail-outer-container">
+          <div className="detail-card">
+            <div className="detail-card-image">
+              <img src={'cardempty/' + this.state.imageUrl} className="effect7"/>
+            </div>
+          </div>
+          <div className="detail-text">
+            <div className="detail-text-header">{this.state.title}</div>
+            <div className="detail-text-desc">{this.state.description}</div>
+          </div>
+        </div>
+        <div className="cards-outer-container">
+          {cardNodes}
+        </div>
       </div>
       );
   }

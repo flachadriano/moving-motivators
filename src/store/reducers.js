@@ -19,10 +19,10 @@ function moveMotivators(previousMotivators, oldIndex, newIndex) {
 function motivators(state = {}, action) {
   switch (action.type) {
   case INCREASE_PRIORITY:
-    if (state.motivators[action.motivatorIndex].priority + 1 > 5) return state;
+    if (state.motivators[action.motivatorIndex].priority + 1 > 1) return state;
     return {...state, motivators: getNewMotivators(state.motivators, action.motivatorIndex, 1)};
   case DECREASE_PRIORITY:
-    if (state.motivators[action.motivatorIndex].priority - 1 < -5) return state;
+    if (state.motivators[action.motivatorIndex].priority - 1 < -1) return state;
     return {...state, motivators: getNewMotivators(state.motivators, action.motivatorIndex, -1)};
   case MOTIVATOR_DRAG:
     console.log('motivator drag', state, action);

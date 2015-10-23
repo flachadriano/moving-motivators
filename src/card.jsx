@@ -12,8 +12,8 @@ module.exports = React.createClass({
   },
   calculatePriorityStyle(place) {
     switch (place) {
-    case 'up': return { flexGrow: 4 - this.props.priority };
-    case 'down': return { flexGrow: 4 + this.props.priority };
+    case 'up': return { flexGrow: 1 - this.props.priority };
+    case 'down': return { flexGrow: 1 + this.props.priority };
     default: return {};
     }
   },

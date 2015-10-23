@@ -21,15 +21,15 @@ const cards = [
 ];
 
 const motivators = [
-  { id: 0, priority: 4 },
-  { id: 1, priority: 3 },
-  { id: 2, priority: 2 },
-  { id: 3, priority: 1 },
+  { id: 0, priority: 0 },
+  { id: 1, priority: 0 },
+  { id: 2, priority: 0 },
+  { id: 3, priority: 0 },
   { id: 4, priority: 0 },
   { id: 5, priority: -1 },
-  { id: 6, priority: -2 },
-  { id: 7, priority: -3 },
-  { id: 8, priority: -4 },
+  { id: 6, priority: 1 },
+  { id: 7, priority: 0 },
+  { id: 8, priority: 1 },
   { id: 9, priority: 0 },
 ];
 
@@ -42,7 +42,7 @@ const store = createStore(motivatorsApp, storeMotivators);
 
 const App = React.createClass({
   componentDidMount: function() {
-    dragula([document.querySelector('.outer-container')], {
+    dragula([document.querySelector('.cards-outer-container')], {
       direction: 'horizontal',
     }).on('drop', function(el, target, source, sibling) {
       const startIndex = el.getAttribute('data-reactid').split('$')[1];
@@ -59,5 +59,3 @@ const App = React.createClass({
 });
 
 ReactDOM.render(<App />, document.getElementById('reactHere'));
-
-// var zoomed;
