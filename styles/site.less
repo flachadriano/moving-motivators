@@ -69,7 +69,7 @@ html, body, .viewport {
       padding-right: 10%;
 
       .detail-text-header {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Lato', sans-serif;
         font-size: 72px;
         font-weight: 700;
         letter-spacing: 0;
@@ -78,7 +78,7 @@ html, body, .viewport {
       }
 
       .detail-text-desc {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Merriweather Sans', sans-serif;
         font-size: 20px;
         color: #333;
         opacity: .9;
@@ -96,14 +96,12 @@ html, body, .viewport {
       .detail-card-image {
         flex: 1;
         flex-grow: 0;
-        flex-basis: 50%;
+        flex-basis: 60%;
       }
 
       img {
         max-width: 100%;
         max-height: 100%;
-        transition: .3s;
-        transform: rotateY(20deg);
       }
     }
   }
@@ -137,7 +135,6 @@ html, body, .viewport {
 }
 
 .column-1, .column-3 {
-  // background-color: grey;
   flex-basis: 40px;
   flex-grow: 0;
   flex-shrink: 0;
@@ -156,23 +153,15 @@ html, body, .viewport {
 
     &.inside-up {
       flex-grow: 5;
-      // background-color: rgba(255,0,0,.3);
     }
 
     &.inside-down {
-      // background-color: rgba(0,0,255,.3);
       flex-grow: 5;
     }
 
     &.inside-img {
       flex-grow: 0;
       border-radius: 2px;
-      // transform: scale(.8);
-      transition: all 0.3s linear;
-
-      &:hover {
-        // transform: scale(1);
-      }
     }
   }
 }
@@ -196,40 +185,4 @@ html, body, .viewport {
     height: 30px;
     font-size: 6px;
     text-align: center;
-}
-
-/* modal */
-.modal-content {
-     -webkit-box-shadow: none;
-     box-shadow: none;
-}
-
-.modal-header {
-    text-align: center;
-    font-weight: 700;
-    border-bottom: none;
-}
-
-.modal-title {
-    text-transform: uppercase;
-}
-
-.modal-body p {
-    padding-top: 15px;
-    font-weight: 700;
-
-}
-
-@media (min-width: 768px){
-    .modal-sm {
-        width: 350px;
-    }
-}
-
-.effect7
-{
-    position:relative;
-    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
