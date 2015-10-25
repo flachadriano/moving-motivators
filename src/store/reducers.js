@@ -1,10 +1,13 @@
 import { INCREASE_PRIORITY, DECREASE_PRIORITY, ORDER_MODIFIED } from './actions';
 
 function modifyPriority(previousMotivators, id, amount) {
-  const newMotivators = [...previousMotivators];
-  const selectedMotivator = newMotivators.find(m => m.id === id);
-  if (selectedMotivator.priority + amount <= 1 && selectedMotivator.priority + amount >= -1) selectedMotivator.priority += amount;
-  return newMotivators;
+  return previousMotivators.map(motivator => {
+    const immutableMotivator = Object.assign({}, motivator);
+    if (immutableMotivator.id === id && immutableMotivator.priority + amount <= 1 && immutableMotivator.priority + amount >= -1) {
+      immutableMotivator.priority += amount;
+    }
+    return immutableMotivator;
+  });
 }
 
 function moveMotivators(previousMotivators, modifiedOrder) {
