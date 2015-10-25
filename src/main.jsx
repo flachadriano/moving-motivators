@@ -2,10 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import dragula from 'react-dragula';
 import Flexbox from './flexbox.jsx';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import motivatorsApp from './store/reducers';
 import { motivatorOrderModified } from './store/actions';
+
+// Redux DevTools store enhancers
+import { devTools, persistState } from 'redux-devtools';
+// React components for Redux DevTools
+import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
+
+const Toggle = require('material-ui/lib/toggle');
 
 const cards = [
   { imageUrl: 'Acceptance.png', name: 'Elfogadás', description: 'Motivál, hogy a körülöttem lévő emberek elfogadnak olyannak, amilyen vagyok, és megerősítenek abban, amit csinálok.'},
@@ -26,10 +33,10 @@ const motivators = [
   { id: 2, priority: 0 },
   { id: 3, priority: 0 },
   { id: 4, priority: 0 },
-  { id: 5, priority: -1 },
-  { id: 6, priority: 1 },
+  { id: 5, priority: 0 },
+  { id: 6, priority: 0 },
   { id: 7, priority: 0 },
-  { id: 8, priority: 1 },
+  { id: 8, priority: 0 },
   { id: 9, priority: 0 },
 ];
 
@@ -38,13 +45,23 @@ const storeMotivators = {
   motivators
 };
 
-const store = createStore(motivatorsApp, storeMotivators);
+const finalCreateStore = compose(
+  devTools(),
+  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+)(createStore);
+
+const store = finalCreateStore(motivatorsApp, storeMotivators);
 
 const App = React.createClass({
+  getInitialState() {
+    return {
+      debug: true,
+    };
+  },
   componentDidMount: function() {
     dragula([document.querySelector('.cards-outer-container')], {
       direction: 'horizontal',
-    }).on('drop', function(el, target, source, sibling) {
+    }).on('drop', function(el) {
       const x = document.getElementsByClassName('column-2');
       const modifiedOrder = [];
       for (let i = 0; i < 10; i++) {
@@ -55,9 +72,17 @@ const App = React.createClass({
     });
   },
   render: function() {
-    return <Provider store={store}>
+    return <div style={{ height: '100%', width: '100%'}}><Provider store={store}>
       <Flexbox/>
-      </Provider>;
+      </Provider>
+      <Toggle style={{ position: 'fixed', left: '10px', top: '10px', width: '230px'}} label="Time-traveling debugger" onToggle={this.toggleDebug}/>
+        <DebugPanel top right bottom style={{ display: this.state.debug ? 'none' : 'block' }}>
+          <DevTools store={store} monitor={LogMonitor} />
+        </DebugPanel>
+      </div>;
+  },
+  toggleDebug: function () {
+    this.setState({debug: !this.state.debug});
   },
 });
 
