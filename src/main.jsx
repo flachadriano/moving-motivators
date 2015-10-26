@@ -61,7 +61,7 @@ const App = React.createClass({
   componentDidMount: function() {
     dragula([document.querySelector('.cards-outer-container')], {
       direction: 'horizontal',
-    }).on('drop', function(el) {
+    }).on('drop', function() {
       const x = document.getElementsByClassName('column-2');
       const modifiedOrder = [];
       for (let i = 0; i < 10; i++) {
@@ -70,6 +70,9 @@ const App = React.createClass({
       this.cancel(true);
       store.dispatch(motivatorOrderModified(modifiedOrder));
     });
+  },
+  toggleDebug: function() {
+    this.setState({debug: !this.state.debug});
   },
   render: function() {
     return <div style={{ height: '100%', width: '100%'}}><Provider store={store}>
@@ -80,9 +83,6 @@ const App = React.createClass({
           <DevTools store={store} monitor={LogMonitor} />
         </DebugPanel>
       </div>;
-  },
-  toggleDebug: function () {
-    this.setState({debug: !this.state.debug});
   },
 });
 

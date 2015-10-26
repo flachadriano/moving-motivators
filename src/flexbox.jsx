@@ -29,7 +29,7 @@ const App = React.createClass({
     });
   },
   render() {
-    const cardNodes = this.props.state.motivators.map((motivator, key) => {
+    const cardNodes = this.props.state.motivators.map((motivator) => {
       return React.createElement(Column,
         { key: motivator.id,
           priority: motivator.priority,
