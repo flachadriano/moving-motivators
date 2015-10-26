@@ -21,7 +21,7 @@ module.exports = React.createClass({
     return (
       <div className="column column-2">
         <div className="inside inside-up" style={this.calculatePriorityStyle('up')}></div>
-        <img className="inside inside-img col-image" src={'card/' + this.props.imageUrl} onClick={this.onClick}/>
+        <div className="inside inside-img"><img className="col-image" src={'card/' + this.props.imageUrl} onClick={this.onClick}/></div>
         <div className="inside inside-down" style={this.calculatePriorityStyle('down')}></div>
       </div>
       );
