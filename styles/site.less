@@ -8,6 +8,7 @@ html, body, .viewport {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
+    font-family: 'Roboto', sans-serif;
 }
 
 .debug-button {
@@ -27,7 +28,7 @@ html, body, .viewport {
     transition: all 0.45s;
     -webkit-transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
     transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
-    background-color: #2a2b30;
+    background-color: white;
 
     &.open {
       transform: translate3d(0px, 50%, -200px) scale(.8);
@@ -58,20 +59,19 @@ html, body, .viewport {
       padding-right: 10%;
       max-height: 100%;
       overflow: hidden;
-      
+
       .detail-text-header {
-        font-family: 'Lato', sans-serif;
         font-size: 72px;
         font-weight: 700;
         letter-spacing: 0;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
         color: #333;
       }
 
       .detail-text-desc {
-        font-family: 'Merriweather Sans', sans-serif;
         font-size: 20px;
-        color: #333;
+        font-weight: 300;
+        color: lighten(#000, 13%);
         opacity: .9;
       }
     }
@@ -101,7 +101,7 @@ html, body, .viewport {
     display: flex;
     height: 260px;
     width: 100%;
-    background-color: #E6E9ED;
+    background-color: #F5F5F5;
     color: #AAB2BD;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
