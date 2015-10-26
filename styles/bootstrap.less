@@ -1,53 +1,236 @@
-// Core variables and mixins
-@import "variables.less";
-@import "../node_modules/bootstrap/less/mixins.less";
+html, body, .viewport {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  color: #cecece;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+}
 
-// Reset and dependencies
-@import "../node_modules/bootstrap/less/normalize.less";
-// @import "../node_modules/bootstrap/less/print.less";
-// @import "../node_modules/bootstrap/less/glyphicons.less";
+.big-container {
+  transition: all ease-in-out .5s;
 
-// Core CSS
-@import "../node_modules/bootstrap/less/scaffolding.less";
-@import "../node_modules/bootstrap/less/type.less";
-@import "../node_modules/bootstrap/less/code.less";
-@import "../node_modules/bootstrap/less/grid.less";
-@import "../node_modules/bootstrap/less/tables.less";
-@import "../node_modules/bootstrap/less/forms.less";
-@import "../node_modules/bootstrap/less/buttons.less";
+  &.transitioned {
+    transform: translateX(-100%);
+  }
+}
 
-// Components
-@import "../node_modules/bootstrap/less/component-animations.less";
-@import "../node_modules/bootstrap/less/dropdowns.less";
-@import "../node_modules/bootstrap/less/button-groups.less";
-@import "../node_modules/bootstrap/less/input-groups.less";
-@import "../node_modules/bootstrap/less/navs.less";
-@import "../node_modules/bootstrap/less/navbar.less";
-// @import "../node_modules/bootstrap/less/breadcrumbs.less";
-// @import "../node_modules/bootstrap/less/pagination.less";
-// @import "../node_modules/bootstrap/less/pager.less";
-@import "../node_modules/bootstrap/less/labels.less";
-@import "../node_modules/bootstrap/less/badges.less";
-@import "../node_modules/bootstrap/less/jumbotron.less";
-@import "../node_modules/bootstrap/less/thumbnails.less";
-// @import "../node_modules/bootstrap/less/alerts.less";
-@import "../node_modules/bootstrap/less/progress-bars.less";
-@import "../node_modules/bootstrap/less/media.less";
-// @import "../node_modules/bootstrap/less/list-group.less";
-@import "../node_modules/bootstrap/less/panels.less";
-@import "../node_modules/bootstrap/less/responsive-embed.less";
-@import "../node_modules/bootstrap/less/wells.less";
-@import "../node_modules/bootstrap/less/close.less";
+.debug-button {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+}
 
-// Components w/ JavaScript
-// @import "../node_modules/bootstrap/less/modals.less";
-// @import "../node_modules/bootstrap/less/tooltip.less";
-// @import "../node_modules/bootstrap/less/popovers.less";
-// @import "../node_modules/bootstrap/less/carousel.less";
+.pages-container {
+  width: 100%;
+  height: 100%;
+}
 
-// Utility classes
-@import "../node_modules/bootstrap/less/utilities.less";
-@import "../node_modules/bootstrap/less/responsive-utilities.less";
+.react-container {
+    height: 100%;
+    width: 100%;
+    transition: all 0.45s;
+    -webkit-transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+    transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+    background-color: white;
 
-// Custom
-@import "site.less";
+    &.open {
+      transform: translate3d(0px, 50%, -200px) scale(.8);
+      box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+      opacity: .9;
+    }
+}
+
+.outer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+
+  .detail-outer-container {
+    height: ~"calc(100% - 260px)";
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    background-color: white;
+    align-items: center;
+
+    .detail-card, .detail-text {
+      flex: 1;
+    }
+
+    .detail-text {
+      padding-right: 10%;
+      max-height: 100%;
+      overflow: hidden;
+
+      .detail-text-header {
+        font-size: 72px;
+        font-weight: 700;
+        letter-spacing: 0;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .detail-text-desc {
+        font-size: 20px;
+        font-weight: 300;
+        color: lighten(#000, 13%);
+        opacity: .9;
+      }
+    }
+
+    .detail-card {
+      perspective: 1000px;
+      text-align: right;
+      align-items: center;
+      display: flex;
+      justify-content: flex-end;
+      overflow: hidden;
+      max-height: 100%;
+
+      .detail-card-image {
+        flex: 1;
+        flex-grow: 0;
+        flex-basis: 60%;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .cards-outer-container {
+    display: flex;
+    height: 260px;
+    width: 100%;
+    background-color: #F5F5F5;
+    color: #AAB2BD;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    &:hover {
+      .priority-less, .priority-more {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.inner-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.column-1, .column-3 {
+  flex-basis: 40px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  align-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all .16s;
+}
+
+.column-2 {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  .inside {
+    flex: 1;
+
+    &.inside-up {
+      flex-grow: 5;
+    }
+
+    &.inside-down {
+      flex-grow: 5;
+    }
+
+    &.inside-img {
+      flex-grow: 0;
+      border-radius: 2px;
+      text-align: center;
+    }
+  }
+}
+
+.col-image {
+  width: 100%;
+  max-width: 125px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+}
+
+.image-card-title {
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.image-card-desc {
+    position: absolute;
+    bottom: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    height: 30px;
+    font-size: 6px;
+    text-align: center;
+}
+
+.form-toggle-container {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+}
+
+.priority-less {
+  position: absolute;
+  top: -32px;
+  left: 15px;
+  opacity: 0;
+  transition: all .16s;
+
+  .priority-less-text {
+    float: right;
+    height: 24px;
+    line-height: 24px;
+    margin-left: 5px;
+  }
+}
+
+.priority-more {
+  position: absolute;
+  top: -32px;
+  right: 15px;
+  opacity: 0;
+  transition: all .16s;
+
+
+  .priority-more-text {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    margin-right: 5px;
+  }
+}
