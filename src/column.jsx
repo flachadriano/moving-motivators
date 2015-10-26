@@ -24,11 +24,11 @@ module.exports = React.createClass({
     return (
       <div className="inner-container">
         <div className="column column-1" onClick={this.onUpClick} style={this.topStyle('up')}>
-          <i className="fa fa-arrow-up"></i>
+          <i className="material-icons">keyboard_arrow_up</i>
         </div>
         <Card priority={this.props.priority} cardId={this.props.cardId} imageUrl={this.props.imageUrl} onSelect={this.props.onSelect} key={this.props.cardId}/>
         <div className="column column-3" onClick={this.onDownClick} style={this.topStyle('down')}>
-          <i className="fa fa-arrow-down"></i>
+          <i className="material-icons">keyboard_arrow_down</i>
         </div>
       </div>
     );

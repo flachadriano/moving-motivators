@@ -54,6 +54,8 @@ const App = React.createClass({
           </div>
         </div>
         <div className="cards-outer-container">
+          <div className="priority-less"><i className="material-icons">fast_rewind</i><span className="priority-less-text">Least important</span></div>
+          <div className="priority-more"><i className="material-icons">fast_forward</i><span className="priority-more-text">Most important</span></div>
           {cardNodes}
         </div>
       </div>
