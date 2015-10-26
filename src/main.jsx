@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import dragula from 'react-dragula';
 import Flexbox from './flexbox.jsx';
-import FormContainer from './form.jsx';
+import FormButton from './form-button.jsx';
 import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import motivatorsApp from './store/reducers';
@@ -57,6 +57,7 @@ const App = React.createClass({
   getInitialState() {
     return {
       debug: true,
+      form: false,
     };
   },
   componentDidMount: function() {
@@ -75,20 +76,25 @@ const App = React.createClass({
   toggleDebug: function() {
     this.setState({debug: !this.state.debug});
   },
-  sendEmail: function() {
-    store.getState().motivators.map(motivator => {
-      console.log(cards[motivator.id].name, '(' + motivator.priority + ')');
-    });
+  toggleForm: function() {
+    this.setState({form: true});
+    // store.getState().motivators.map(motivator => {
+    //   console.log(cards[motivator.id].name, '(' + motivator.priority + ')');
+    // });
+  },
+  containerClass: function () {
+    return this.state.form ? 'big-container transitioned' : 'big-container';
   },
   render: function() {
-    return <div style={{ height: '100%', width: '100%'}}><Provider store={store}>
-      <Flexbox/>
+    return <div className={this.containerClass()} style={{ height: '100%', width: '100%'}}>
+      <Provider store={store}>
+        <Flexbox/>
       </Provider>
-      <FormContainer onSend={this.sendEmail}/>
+      <FormButton onClick={this.toggleForm}/>
       <Toggle style={{ position: 'fixed', left: '10px', top: '10px', width: '230px'}} label="Time-traveling debugger" onToggle={this.toggleDebug}/>
-        <DebugPanel top right bottom style={{ display: this.state.debug ? 'none' : 'block' }}>
-          <DevTools store={store} monitor={LogMonitor} />
-        </DebugPanel>
+      <DebugPanel top right bottom style={{ display: this.state.debug ? 'none' : 'block' }}>
+        <DevTools store={store} monitor={LogMonitor} />
+      </DebugPanel>
       </div>;
   },
 });
