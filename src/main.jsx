@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import dragula from 'react-dragula';
 import Flexbox from './flexbox.jsx';
+import FormContainer from './form.jsx';
 import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import motivatorsApp from './store/reducers';
@@ -74,10 +75,16 @@ const App = React.createClass({
   toggleDebug: function() {
     this.setState({debug: !this.state.debug});
   },
+  sendEmail: function() {
+    store.getState().motivators.map(motivator => {
+      console.log(cards[motivator.id].name, '(' + motivator.priority + ')');
+    });
+  },
   render: function() {
     return <div style={{ height: '100%', width: '100%'}}><Provider store={store}>
       <Flexbox/>
       </Provider>
+      <FormContainer onSend={this.sendEmail}/>
       <Toggle style={{ position: 'fixed', left: '10px', top: '10px', width: '230px'}} label="Time-traveling debugger" onToggle={this.toggleDebug}/>
         <DebugPanel top right bottom style={{ display: this.state.debug ? 'none' : 'block' }}>
           <DevTools store={store} monitor={LogMonitor} />
