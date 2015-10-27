@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom';
 import dragula from 'react-dragula';
 import Flexbox from './flexbox.jsx';
 import FormButton from './form-button.jsx';
+import FormSubmit from './form-submit.jsx';
 import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import motivatorsApp from './store/reducers';
 import { motivatorOrderModified } from './store/actions';
+import Toggle from 'material-ui/lib/toggle';
 
 // Redux DevTools store enhancers
 import { devTools, persistState } from 'redux-devtools';
 // React components for Redux DevTools
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
-const Toggle = require('material-ui/lib/toggle');
 
 const cards = [
   { imageUrl: 'Acceptance.png', name: 'Elfogadás', description: 'Motivál, hogy a körülöttem lévő emberek elfogadnak olyannak, amilyen vagyok, és megerősítenek abban, amit csinálok.'},
@@ -82,20 +83,23 @@ const App = React.createClass({
     //   console.log(cards[motivator.id].name, '(' + motivator.priority + ')');
     // });
   },
-  containerClass: function () {
+  containerClass: function() {
     return this.state.form ? 'big-container transitioned' : 'big-container';
   },
   render: function() {
-    return <div className={this.containerClass()} style={{ height: '100%', width: '100%'}}>
-      <Provider store={store}>
-        <Flexbox/>
-      </Provider>
-      <FormButton onClick={this.toggleForm}/>
-      <Toggle style={{ position: 'fixed', left: '10px', top: '10px', width: '230px'}} label="Time-traveling debugger" onToggle={this.toggleDebug}/>
-      <DebugPanel top right bottom style={{ display: this.state.debug ? 'none' : 'block' }}>
-        <DevTools store={store} monitor={LogMonitor} />
-      </DebugPanel>
-      </div>;
+    return (
+      <div className={this.containerClass()} style={{ height: '100%', width: '100%'}}>
+        <Provider store={store}>
+          <Flexbox/>
+        </Provider>
+        <FormButton onClick={this.toggleForm}/>
+        <Toggle style={{ position: 'fixed', left: '10px', top: '10px', width: '230px'}} label="Time-traveling debugger" onToggle={this.toggleDebug}/>
+        <DebugPanel top right bottom style={{ display: this.state.debug ? 'none' : 'block' }}>
+          <DevTools store={store} monitor={LogMonitor} />
+        </DebugPanel>
+        <FormSubmit/>
+      </div>
+    );
   },
 });
 

@@ -12,6 +12,7 @@ html, body, .viewport {
 }
 
 .big-container {
+  z-index: 1;
   transition: all ease-in-out .5s;
 
   &.transitioned {
@@ -232,5 +233,27 @@ html, body, .viewport {
     height: 24px;
     line-height: 24px;
     margin-right: 5px;
+  }
+}
+
+.form-submit-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all ease-in-out .5s;
+  transform: translateX(100%);
+  flex-direction: column;
+
+  .form-submit-input-container {
+    max-width: 50%;
+  }
+
+  .form-submit-button-container {
+    margin-top: 15px;
   }
 }

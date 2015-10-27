@@ -21,7 +21,6 @@ const App = React.createClass({
     if (direction === 'down') dispatch(decreaseMotivatorPriority(cardId));
   },
   cardSelected(cardId) {
-    // FIXME
     this.setState({
       title: this.props.state.cards[cardId].name,
       imageUrl: this.props.state.cards[cardId].imageUrl,
