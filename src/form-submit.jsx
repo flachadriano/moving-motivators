@@ -4,7 +4,7 @@ import TextField from 'material-ui/lib/text-field';
 
 module.exports = React.createClass({
   propTypes: {
-    onSubmit: React.PropTypes.func,
+    onSubmitClick: React.PropTypes.func,
   },
   getInitialState() {
     return {
@@ -20,7 +20,7 @@ module.exports = React.createClass({
     if (this.state.nameInputValue.trim().length === 0) {
       this.setState({nameError: 'This field is required.'});
     } else {
-      this.props.onSubmit();
+      this.props.onSubmitClick();
       this.setState({submitted: true});
     }
   },
