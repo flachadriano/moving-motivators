@@ -79,10 +79,12 @@ const App = React.createClass({
   },
   toggleForm: function() {
     this.setState({form: true});
-    // store.getState().motivators.map(motivator => {
-    //   console.log(cards[motivator.id].name, '(' + motivator.priority + ')');
-    // });
   },
+  onSubmit: function() {
+    store.getState().motivators.map(motivator => {
+      console.log(cards[motivator.id].name, '(' + motivator.priority + ')');
+    });
+  }
   containerClass: function() {
     return this.state.form ? 'big-container transitioned' : 'big-container';
   },
@@ -97,7 +99,7 @@ const App = React.createClass({
         <DebugPanel top right bottom style={{ display: this.state.debug ? 'none' : 'block' }}>
           <DevTools store={store} monitor={LogMonitor} />
         </DebugPanel>
-        <FormSubmit/>
+        <FormSubmit onSubmit={this.submitData}/>
       </div>
     );
   },
