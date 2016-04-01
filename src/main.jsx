@@ -1,3 +1,5 @@
+var pg = require('pg').default;
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import dragula from 'react-dragula';
@@ -91,9 +93,22 @@ const App = React.createClass({
     });
   },
   onSubmit() {
-    store.getState().motivators.map(motivator => {
-      console.log(cards[motivator.id].name, `(${motivator.priority})`);
+    const result = store.getState().motivators.map(motivator => ({
+      name: cards[motivator.id].name,
+      priority: motivator.priority
+    }));
+
+    pg.defaults.ssl = true;
+    pg.connect(process.env.URL, (err, client) => {
+      if (err) throw err;
+      console.log('Connected to postgres! Getting schemas...');
+      client
+        .query('SELECT table_schema,table_name FROM information_schema.tables;')
+        .on('row', function(row) {
+          console.log(JSON.stringify(row));
+        });
     });
+    console.log(result);
   },
   toggleDebug() {
     this.setState({ debug: !this.state.debug });
