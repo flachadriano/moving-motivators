@@ -14,7 +14,7 @@ var config = {
   module: {
     noParse: [new RegExp(/\.min.jsx$/)],
     loaders: [
-      { test: /\.(js|jsx)$/, loader: 'babel-loader' },
+      { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
     ],
   }
 };
