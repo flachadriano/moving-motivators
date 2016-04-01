@@ -8,25 +8,41 @@ import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import motivatorsApp from './store/reducers';
 import { motivatorOrderModified } from './store/actions';
-import Toggle from 'material-ui/lib/toggle';
 
 // Redux DevTools store enhancers
 import { devTools, persistState } from 'redux-devtools';
-// React components for Redux DevTools
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
-
 
 const cards = [
-  { imageUrl: 'Acceptance.png', name: 'Elfogadás', description: 'Motivál, hogy a körülöttem lévő emberek elfogadnak olyannak, amilyen vagyok, és megerősítenek abban, amit csinálok.'},
-  { imageUrl: 'Curiosity.png', name: 'Kíváncsiság', description: 'Motivál, hogy bár vannak monoton, esetleg unalmas feladatok, számos más dolog van, amit felfedezhetek és amin gondolkodhatok.'},
-  { imageUrl: 'Freedom.png', name: 'Szabadság', description: 'Motivál, hogy független vagyok a többiektől, megvannak a saját feladataim és felelősségem.'},
-  { imageUrl: 'Goal.png', name: 'Cél', description: 'Motivál, hogy nem csupán pénzt keresek, hanem a munkámban visszatükröződnek a személyes (élet)céljaim is. Például munkámmal hozzájárulok ahhoz, hogy a világ (kicsit) jobb legyen.'},
-  { imageUrl: 'Honor.png', name: 'Megbecsülés', description: 'Motivál, hogy a személyes értékrendem megjelenik a csapat / szervezet alkotta szabályokban, ezért örömmel tartom be őket, lojális vagyok hozzájuk.'},
-  { imageUrl: 'Mastery.png', name: 'Szakmai kiválóság', description: 'Motivál, hogy a munkám olyan kihívások elé állít, amelyek próbára teszik a szaktudásomat, de képességeimnek megfelelőek (nem érzem lehetetlennek a megoldásukat).'},
-  { imageUrl: 'Order.png', name: 'Rend', description: 'Motivál, hogy a szervezetben elegendő előírás, szabályozás és irányelv van ahhoz, hogy kiszámítható, stabil munkakörnyezetben dolgozhassak.'},
-  { imageUrl: 'Power.png', name: 'Hatalom', description: 'Motivál, hogy lehetőségem van befolyásolni az eseményeket, amik körülöttem történnek.'},
-  { imageUrl: 'Relatedness.png', name: 'Kötődés', description: 'Motivál, hogy a körülöttem lévő emberekkel jó kapcsolatot ápolok, és a közeli ismeretségek kialakulását a céges környezet is támogatja.'},
-  { imageUrl: 'Status.png', name: 'Státusz', description: 'Motivál, hogy a szervezeti hierarchiában jó pozícióban vagyok, és ezt a velem dolgozók is elismerik.'},
+  { imageUrl: 'Acceptance.png',
+    name: 'Elfogadás',
+    description: 'Motivál, hogy a körülöttem lévő emberek elfogadnak olyannak, amilyen vagyok, és megerősítenek abban, amit csinálok.' },
+  { imageUrl: 'Curiosity.png',
+    name: 'Kíváncsiság',
+    description: 'Motivál, hogy bár vannak monoton, esetleg unalmas feladatok, számos más dolog van, amit felfedezhetek és amin gondolkodhatok.' },
+  { imageUrl: 'Freedom.png',
+    name: 'Szabadság',
+    description: 'Motivál, hogy független vagyok a többiektől, megvannak a saját feladataim és felelősségem.' },
+  { imageUrl: 'Goal.png',
+    name: 'Cél',
+    description: 'Motivál, hogy nem csupán pénzt keresek, hanem a munkámban visszatükröződnek a személyes (élet)céljaim is. Például munkámmal hozzájárulok ahhoz, hogy a világ (kicsit) jobb legyen.' },
+  { imageUrl: 'Honor.png',
+    name: 'Megbecsülés',
+    description: 'Motivál, hogy a személyes értékrendem megjelenik a csapat / szervezet alkotta szabályokban, ezért örömmel tartom be őket, lojális vagyok hozzájuk.' },
+  { imageUrl: 'Mastery.png',
+    name: 'Szakmai kiválóság',
+    description: 'Motivál, hogy a munkám olyan kihívások elé állít, amelyek próbára teszik a szaktudásomat, de képességeimnek megfelelőek (nem érzem lehetetlennek a megoldásukat).' },
+  { imageUrl: 'Order.png',
+    name: 'Rend',
+    description: 'Motivál, hogy a szervezetben elegendő előírás, szabályozás és irányelv van ahhoz, hogy kiszámítható, stabil munkakörnyezetben dolgozhassak.' },
+  { imageUrl: 'Power.png',
+    name: 'Hatalom',
+    description: 'Motivál, hogy lehetőségem van befolyásolni az eseményeket, amik körülöttem történnek.' },
+  { imageUrl: 'Relatedness.png',
+    name: 'Kötődés',
+    description: 'Motivál, hogy a körülöttem lévő emberekkel jó kapcsolatot ápolok, és a közeli ismeretségek kialakulását a céges környezet is támogatja.' },
+  { imageUrl: 'Status.png',
+    name: 'Státusz',
+    description: 'Motivál, hogy a szervezeti hierarchiában jó pozícióban vagyok, és ezt a velem dolgozók is elismerik.' },
 ];
 
 const motivators = [
@@ -61,10 +77,10 @@ const App = React.createClass({
       form: false,
     };
   },
-  componentDidMount: function() {
+  componentDidMount() {
     dragula([document.querySelector('.cards-outer-container')], {
       direction: 'horizontal',
-    }).on('drop', function() {
+    }).on('drop', function () {
       const x = document.getElementsByClassName('column-2');
       const modifiedOrder = [];
       for (let i = 0; i < 10; i++) {
@@ -74,32 +90,28 @@ const App = React.createClass({
       store.dispatch(motivatorOrderModified(modifiedOrder));
     });
   },
-  toggleDebug: function() {
-    this.setState({debug: !this.state.debug});
-  },
-  toggleForm: function() {
-    this.setState({form: true});
-  },
-  onSubmit: function() {
+  onSubmit() {
     store.getState().motivators.map(motivator => {
-      console.log(cards[motivator.id].name, '(' + motivator.priority + ')');
+      console.log(cards[motivator.id].name, `(${motivator.priority})`);
     });
   },
-  containerClass: function() {
+  toggleDebug() {
+    this.setState({ debug: !this.state.debug });
+  },
+  toggleForm() {
+    this.setState({ form: true });
+  },
+  containerClass() {
     return this.state.form ? 'big-container transitioned' : 'big-container';
   },
-  render: function() {
+  render() {
     return (
-      <div className={this.containerClass()} style={{ height: '100%', width: '100%'}}>
+      <div className={this.containerClass()} style={{ height: '100%', width: '100%' }}>
         <Provider store={store}>
-          <Flexbox/>
+          <Flexbox />
         </Provider>
-        <FormButton onClick={this.toggleForm}/>
-        <Toggle style={{ position: 'fixed', left: '10px', top: '10px', width: '230px'}} label="Time-traveling debugger" onToggle={this.toggleDebug}/>
-        <DebugPanel top right bottom style={{ display: this.state.debug ? 'none' : 'block' }}>
-          <DevTools store={store} monitor={LogMonitor} />
-        </DebugPanel>
-        <FormSubmit onSubmitClick={this.onSubmit}/>
+        <FormButton onClick={this.toggleForm} />
+        <FormSubmit onSubmitClick={this.onSubmit} />
       </div>
     );
   },
