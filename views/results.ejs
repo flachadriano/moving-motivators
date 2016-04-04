@@ -26,22 +26,21 @@
           <h1>Results</h1>
         </div>
         <div class="row">
-          <div class="col-xs-2 "><a href="#" class="thumbnail"> <img src="/laura/laura1.jpg" alt="..."></a></div>
-          <div class="col-xs-2 "><a href="#" class="thumbnail"> <img src="/laura/laura2.jpg" alt="..."></a></div>
-          <div class="col-xs-2 "><a href="#" class="thumbnail"> <img src="/laura/laura3.jpg" alt="..."></a></div>
-          <div class="col-xs-2 "><a href="#" class="thumbnail"> <img src="/laura/laura4.jpg" alt="..."></a></div>
-          <div class="col-xs-2 "><a href="#" class="thumbnail"> <img src="/laura/laura5.jpg" alt="..."></a></div>
-          <div class="col-xs-2 "><a href="#" class="thumbnail"> <img src="/laura/laura6.jpg" alt="..."></a></div>
+          <div class="col-xs-12 "><a href="#" class="thumbnail"> <img src="/laura/laura6.jpg" alt="..."></a></div>
         </div>
         <div class="col-md-12">
           <table class="table table-bordered">
             <tr>
+              <th>ID</th>
+              <th>Index</th>
               <th>Email</th>
               <th>Motivator</th>
               <th>Priority</th>
             </tr>
             <% rows.forEach(function(row) { %>
               <tr>
+                <td><%= row.id %></td>
+                <td><%= row.idx %></td>
                 <td><%= row.email %></td>
                 <td><%= row.name %></td>
                 <td><%= row.value %></td>

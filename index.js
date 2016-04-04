@@ -22,7 +22,7 @@ app.get('/', (request, response) => {
 app.get(`/${process.env.SECRET_URL}`, (request, response) => {
   pg.defaults.ssl = true;
   const client = new pg.Client(process.env.URL);
-  const getResultsQuery = 'select users.email, user_cards.value, user_cards.idx, cards.name from users, user_cards, cards where users.id=user_cards.user_id and user_cards.card_id=cards.id order by users.id, user_cards.idx;';
+  const getResultsQuery = 'select users.id, users.email, user_cards.value, user_cards.idx, cards.name from users, user_cards, cards where users.id=user_cards.user_id and user_cards.card_id=cards.id order by users.id, user_cards.idx;';
 
   client.connect((err) => {
     if (err) return console.log('Get Error', err);
