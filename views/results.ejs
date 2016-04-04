@@ -48,6 +48,59 @@
               <% }); %>
             </table>
         </div>
+
+        <div class="col-md-12">
+          <table class="table table-bordered">
+            <tr>
+              <th>Email</th>
+              <th>Elfogadás</th>
+              <th></th>
+              <th>Kíváncsiság</th>
+              <th></th>
+              <th>Szabadság</th>
+              <th></th>
+              <th>Cél</th>
+              <th></th>
+              <th>Megbecsülés</th>
+              <th></th>
+              <th>Szakmai kiválóság</th>
+              <th></th>
+              <th>Rend</th>
+              <th></th>
+              <th>Hatalom</th>
+              <th></th>
+              <th>Kötődés</th>
+              <th></th>
+              <th>Státusz</th>
+              <th></th>
+            </tr>
+            <% Object.keys(r).forEach(function(key) { %>
+              <tr>
+                <td><%= key %></td>
+                <td><%= r[key]['0'].idx %></td>
+                <td><%= r[key]['0'].value %></td>
+                <td><%= r[key]['1'].idx %></td>
+                <td><%= r[key]['1'].value %></td>
+                <td><%= r[key]['2'].idx %></td>
+                <td><%= r[key]['2'].value %></td>
+                <td><%= r[key]['3'].idx %></td>
+                <td><%= r[key]['3'].value %></td>
+                <td><%= r[key]['4'].idx %></td>
+                <td><%= r[key]['4'].value %></td>
+                <td><%= r[key]['5'].idx %></td>
+                <td><%= r[key]['5'].value %></td>
+                <td><%= r[key]['6'].idx %></td>
+                <td><%= r[key]['6'].value %></td>
+                <td><%= r[key]['7'].idx %></td>
+                <td><%= r[key]['7'].value %></td>
+                <td><%= r[key]['8'].idx %></td>
+                <td><%= r[key]['8'].value %></td>
+                <td><%= r[key]['9'].idx %></td>
+                <td><%= r[key]['9'].value %></td>
+              </tr>
+              <% }); %>
+            </table>
+        </div>
       </div>
     </body>
 </html>
