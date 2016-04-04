@@ -1,24 +1,38 @@
 const pg = require('pg');
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const Q = require('q');
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(express.static(`${__dirname}/public`));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/react', express.static(`${__dirname}/node_modules/react/dist/react.js`));
+app.use('/bootstrap', express.static(`${__dirname}/node_modules/bootstrap/dist/css/bootstrap.min.css`));
 
-// TODO: use react.min.js in production
-app.use('/react', express.static(__dirname + '/node_modules/react/dist/react.js'));
-
-// views is directory for all template files
-app.set('views', __dirname + '/views');
+app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
 
 app.get('/', (request, response) => {
   response.render('index');
+});
+
+app.get(`/${process.env.SECRET_URL}`, (request, response) => {
+  pg.defaults.ssl = true;
+  const client = new pg.Client(process.env.URL);
+  const getResultsQuery = 'select users.email, user_cards.value, user_cards.idx, cards.name from users, user_cards, cards where users.id=user_cards.user_id and user_cards.card_id=cards.id order by users.id, user_cards.idx;';
+
+  client.connect((err) => {
+    if (err) return console.log('Get Error', err);
+    client.query(getResultsQuery, (getResultQueryError, result) => {
+      if (getResultQueryError) return console.log('Get error!', getResultQueryError);
+      return response.render('results', {
+        rows: result.rows
+      });
+    });
+  });
 });
 
 app.post('/save', (request, response) => {
@@ -52,7 +66,7 @@ app.post('/save', (request, response) => {
   });
 });
 
-app.listen(app.get('port'), function () {
+app.listen(app.get('port'), () => {
   console.log('Node app is running on port', app.get('port'));
 });
 
