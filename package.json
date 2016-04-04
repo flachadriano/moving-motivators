@@ -21,6 +21,7 @@
     "gulp-less": "^3.0.3",
     "material-ui": "^0.13.0",
     "pg": "4.5.2",
+    "q": "^1.4.1",
     "react": "^0.14.0",
     "react-addons-create-fragment": "^0.14.0",
     "react-addons-pure-render-mixin": "^0.14.0",
