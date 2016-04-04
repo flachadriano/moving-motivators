@@ -12,6 +12,8 @@ import { motivatorOrderModified } from './store/actions';
 // Redux DevTools store enhancers
 import { devTools, persistState } from 'redux-devtools';
 
+import { fecth } from 'whatwg-fetch';
+
 const cards = [
   { imageUrl: 'Acceptance.png',
     name: 'Elfogadás',
@@ -90,12 +92,23 @@ const App = React.createClass({
       store.dispatch(motivatorOrderModified(modifiedOrder));
     });
   },
-  onSubmit() {
+  onSubmit(email) {
     const result = store.getState().motivators.map(motivator => ({
+      id: motivator.id,
       name: cards[motivator.id].name,
       priority: motivator.priority
     }));
-    console.log(result);
+    fetch('/save', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email,
+        result,
+      })
+    });
   },
   toggleDebug() {
     this.setState({ debug: !this.state.debug });

@@ -1,4 +1,4 @@
-import { INCREASE_PRIORITY, DECREASE_PRIORITY, ORDER_MODIFIED } from './actions';
+import { INCREASE_PRIORITY, DECREASE_PRIORITY, ORDER_MODIFIED, EMAIL_ENTERED } from './actions';
 
 function modifyPriority(previousMotivators, id, amount) {
   return previousMotivators.map(motivator => {
@@ -22,11 +22,11 @@ function moveMotivators(previousMotivators, modifiedOrder) {
 function motivators(state = {}, action) {
   switch (action.type) {
   case INCREASE_PRIORITY:
-    return {...state, motivators: modifyPriority(state.motivators, action.motivatorId, 1)};
+    return { ...state, motivators: modifyPriority(state.motivators, action.motivatorId, 1) };
   case DECREASE_PRIORITY:
-    return {...state, motivators: modifyPriority(state.motivators, action.motivatorId, -1)};
+    return { ...state, motivators: modifyPriority(state.motivators, action.motivatorId, -1) };
   case ORDER_MODIFIED:
-    return {...state, motivators: moveMotivators(state.motivators, action.modifiedOrder) };
+    return { ...state, motivators: moveMotivators(state.motivators, action.modifiedOrder) };
   default:
     return state;
   }

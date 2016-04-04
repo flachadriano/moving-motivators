@@ -11,7 +11,7 @@ module.exports = React.createClass({
   render() {
     return (
       <div className="form-toggle-container">
-        <RaisedButton label="Save my motivators" primary={true} onClick={this.onClick}/>
+        <RaisedButton label="Save my motivators" primary={true} onClick={this.onClick} />
       </div>
       );
   },

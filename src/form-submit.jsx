@@ -1,6 +1,7 @@
 import React from 'react';
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
+import EmailValidator from 'email-validator';
 
 module.exports = React.createClass({
   propTypes: {
@@ -14,14 +15,16 @@ module.exports = React.createClass({
     };
   },
   onHandleNameInputChange(e) {
-    this.setState({nameInputValue: e.target.value, nameError: ''});
+    this.setState({ nameInputValue: e.target.value, nameError: '' });
   },
   onSubmitClick() {
     if (this.state.nameInputValue.trim().length === 0) {
-      this.setState({nameError: 'This field is required.'});
+      this.setState({ nameError: 'This field is required.' });
+    } else if (!EmailValidator.validate(this.state.nameInputValue.trim())) {
+      this.setState({ nameError: 'Please enter a valid email address.' });
     } else {
-      this.props.onSubmitClick();
-      this.setState({submitted: true});
+      this.props.onSubmitClick(this.state.nameInputValue);
+      this.setState({ submitted: true });
     }
   },
   render() {
@@ -29,14 +32,15 @@ module.exports = React.createClass({
       <div className="form-submit-container">
         <div className="form-submit-input-container">
           <TextField
-            hintText="Name"
-            floatingLabelText="Enter your name"
+            hintText="Email"
+            floatingLabelText="Enter your email"
             errorText={this.state.nameError}
             value={this.state.nameInputValue}
-            onChange={this.onHandleNameInputChange} />
+            onChange={this.onHandleNameInputChange}
+          />
         </div>
         <div className="form-submit-button-container">
-          <RaisedButton label="Send" primary onClick={this.onSubmitClick}/>
+          <RaisedButton label="Send" primary onClick={this.onSubmitClick} />
         </div>
       </div>);
 
