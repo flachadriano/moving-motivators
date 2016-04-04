@@ -36,7 +36,7 @@
     "webpack": "^1.12.14"
   },
   "engines": {
-    "node": "0.12.7"
+    "node": "4.4.0"
   },
   "repository": {
     "type": "git",
