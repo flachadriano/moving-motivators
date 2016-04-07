@@ -1,8 +1,4 @@
-var path = require('path');
-var webpack = require('webpack');
-var nodeDir = __dirname + '/node_modules';
-
-var config = {
+const config = {
   entry: {
     main: './src/main.jsx',
   },

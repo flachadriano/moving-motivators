@@ -25,25 +25,22 @@ app.get(`/${process.env.SECRET_URL}`, (request, response) => {
   const client = new pg.Client(process.env.URL);
   const getResultsQuery = 'select users.email, cards.id, user_cards.value, user_cards.idx, cards.name from users, user_cards, cards where users.id=user_cards.user_id and user_cards.card_id=cards.id order by users.id, user_cards.idx;';
 
-
   client.connect((err) => {
     if (err) return console.log('Get Error', err);
     client.query(getResultsQuery, (getResultQueryError, result) => {
       if (getResultQueryError) return console.log('Get error!', getResultQueryError);
 
-      var r = _.groupBy(result.rows, function(item){
-        return item.email;
-      });
+      const resultsGroupedByEmail = _.groupBy(result.rows, item => item.email);
 
-      _.forEach(r, function(value, key) {
-        r[key] = _.keyBy(r[key], 'id');
+      _.forEach(resultsGroupedByEmail, (value, key) => {
+        resultsGroupedByEmail[key] = _.keyBy(resultsGroupedByEmail[key], 'id');
       });
 
       client.end();
 
       return response.render('results', {
         rows: result.rows,
-        r: r,
+        r: resultsGroupedByEmail,
       });
     });
   });

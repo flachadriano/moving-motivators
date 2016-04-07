@@ -1,13 +1,12 @@
-var gulp  = require('gulp');
-var less  = require('gulp-less');
+const gulp = require('gulp');
+const less = require('gulp-less');
 
-gulp.task('less_moving_motivators', function() {
-  return gulp.src('styles/bootstrap.less')
+gulp.task('less_moving_motivators', () => gulp.src('styles/bootstrap.less')
   .pipe(less())
-  .pipe(gulp.dest('public'));
-});
+  .pipe(gulp.dest('public'))
+);
 
-gulp.task('watch_moving_motivators', function() {
+gulp.task('watch_moving_motivators', () => {
   gulp.watch('styles/**/*.less', ['less_moving_motivators']);
 });
 
