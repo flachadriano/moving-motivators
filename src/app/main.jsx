@@ -12,7 +12,7 @@ import { motivatorOrderModified } from './store/actions';
 // Redux DevTools store enhancers
 import { devTools, persistState } from 'redux-devtools';
 
-import { fecth } from 'whatwg-fetch';
+const request = require('superagent');
 
 const cards = [
   { imageUrl: 'Acceptance.png',
@@ -98,17 +98,13 @@ const App = React.createClass({
       name: cards[motivator.id].name,
       priority: motivator.priority
     }));
-    fetch('/save', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email,
-        result,
-      })
-    });
+
+    request
+      .post('/save')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send({ email, result })
+      .end();
   },
   toggleDebug() {
     this.setState({ debug: !this.state.debug });

@@ -7,7 +7,9 @@
     "start": "node index.js",
     "dev": "webpack-dev-server --devtool eval --progress --colors --config=webpack.config.js",
     "deploy": "webpack -p",
-    "postinstall": "gulp deploy && npm run deploy"
+    "postinstall": "gulp deploy && npm run deploy",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive",
+    "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
     "babel-core": "^6.7.4",
@@ -22,6 +24,7 @@
     "express": "4.13.3",
     "gulp": "^3.9.0",
     "gulp-less": "^3.0.3",
+    "immutable": "^3.7.6",
     "lodash": "^4.7.0",
     "material-ui": "^0.13.0",
     "pg": "4.5.2",
@@ -35,10 +38,10 @@
     "react-dragula": "^1.0.12",
     "react-redux": "^4.0.0",
     "react-tap-event-plugin": "^0.2.1",
-    "redux": "^3.0.2",
+    "redux": "^3.3.1",
     "redux-devtools": "^2.1.5",
-    "webpack": "^1.12.14",
-    "whatwg-fetch": "^0.11.0"
+    "superagent": "^1.8.3",
+    "webpack": "^1.12.14"
   },
   "engines": {
     "node": "4.4.0"
@@ -55,6 +58,9 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "webpack-dev-server": "^1.12.1"
+    "webpack-dev-server": "^1.12.1",
+    "chai": "^3.5.0",
+    "chai-immutable": "^1.5.4",
+    "mocha": "^2.4.5"
   }
 }
