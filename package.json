@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "webpack-dev-server --devtool eval --progress --colors --config=webpack.config.js",
-    "deploy": "webpack -p",
+    "deploy": "webpack -p --define process.env.NODE_ENV='\"production\"'",
     "postinstall": "gulp deploy && npm run deploy",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive",
     "test:watch": "npm run test -- --watch"
