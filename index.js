@@ -17,7 +17,9 @@ app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
 
 app.get('/', (request, response) => {
-  response.render('index');
+  response.render('index', {
+    env: process.env.ENV
+  });
 });
 
 app.get(`/${process.env.SECRET_URL}`, (request, response) => {
@@ -43,6 +45,12 @@ app.get(`/${process.env.SECRET_URL}`, (request, response) => {
         r: resultsGroupedByEmail,
       });
     });
+  });
+});
+
+app.get(`/${process.env.SECRET_URL_2}`, (request, response) => {
+  return response.render('newresults', {
+    env: process.env.ENV
   });
 });
 

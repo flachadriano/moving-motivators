@@ -1,6 +1,7 @@
 const config = {
   entry: {
     main: './src/app/main.jsx',
+    app: './src/results/client/app.jsx'
   },
   output: {
     path: './public/js',
