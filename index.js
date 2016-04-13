@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const _ = require('lodash');
 const Q = require('q');
 const app = express();
-const fixtures = require('./fixtures/results');
+const sqlResultMapper = require('./src/sqlresultmapper');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -51,12 +51,24 @@ app.get(`/${process.env.SECRET_URL}`, (request, response) => {
 
 app.get(`/${process.env.SECRET_URL_2}`, (request, response) => {
   return response.render('newresults', {
-    env: process.env.ENV
+    env: process.env.ENV,
+    fetch: process.env.SECRET_FETCH_URL,
   });
 });
 
-app.get('/fixtures', (request, response) => {
-  return response.json(fixtures.SampleResults);
+app.get(`/${process.env.SECRET_FETCH_URL}`, (request, response) => {
+  pg.defaults.ssl = true;
+  const client = new pg.Client(process.env.URL);
+  const getResultsQuery = 'select users.email, cards.id, user_cards.value, user_cards.idx, cards.name from users, user_cards, cards where users.id=user_cards.user_id and user_cards.card_id=cards.id order by users.id, user_cards.idx;';
+
+  client.connect((err) => {
+    if (err) return console.log('Get Error', err);
+    client.query(getResultsQuery, (getResultQueryError, result) => {
+      if (getResultQueryError) return console.log('Get error!', getResultQueryError);
+      client.end();
+      return response.json(sqlResultMapper.mapResult(result));
+    });
+  });
 });
 
 app.post('/save', (request, response) => {

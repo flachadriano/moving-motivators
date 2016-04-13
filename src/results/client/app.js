@@ -19,7 +19,7 @@ function loadResults() {
   return function (dispatch) {
     dispatch({ type: 'START_LOADING' });
     return new Promise(() => {
-      request.get('/fixtures').end((err, res) => {
+      request.get(`/${window.fetchUrl}`).end((err, res) => {
         dispatch({ type: 'SET_ENTRIES', entries: res.body });
         dispatch({ type: 'END_LOADING' });
       });
