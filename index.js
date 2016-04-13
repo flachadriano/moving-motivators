@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const _ = require('lodash');
 const Q = require('q');
 const app = express();
+const fixtures = require('./fixtures/results');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -52,6 +53,10 @@ app.get(`/${process.env.SECRET_URL_2}`, (request, response) => {
   return response.render('newresults', {
     env: process.env.ENV
   });
+});
+
+app.get('/fixtures', (request, response) => {
+  return response.json(fixtures.SampleResults);
 });
 
 app.post('/save', (request, response) => {

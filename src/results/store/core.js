@@ -1,7 +1,8 @@
-import { Map, fromJS } from 'immutable';
+import { Map, List, fromJS } from 'immutable';
 
 export const INITIAL_STATE = Map({
-  loading: true
+  loading: true,
+  entries: List(),
 });
 
 export function setEntries(state, entries) {

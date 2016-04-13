@@ -1,16 +1,16 @@
 import { Map, fromJS } from 'immutable';
 import { expect } from 'chai';
 import reducer from '../src/results/store/reducer';
-import { fixtureData } from './fixtures';
+import fixtureData from '../fixtures/results';
 
 describe('reducer', () => {
   it('handles SET_ENTRIES', () => {
     const initialState = Map();
-    const action = { type: 'SET_ENTRIES', entries: fixtureData };
+    const action = { type: 'SET_ENTRIES', entries: fixtureData.SampleResults };
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      entries: fixtureData
+      entries: fixtureData.SampleResults
     }));
   });
 
@@ -35,18 +35,18 @@ describe('reducer', () => {
   });
 
   it('has initial state', () => {
-    const action = { type: 'SET_ENTRIES', entries: fixtureData };
+    const action = { type: 'SET_ENTRIES', entries: fixtureData.SampleResults };
     const nextState = reducer(undefined, action);
 
     expect(nextState).to.equal(fromJS({
       loading: true,
-      entries: fixtureData
+      entries: fixtureData.SampleResults
     }));
   });
 
   it('can be used with reduce', () => {
     const actions = [
-      { type: 'SET_ENTRIES', entries: fixtureData },
+      { type: 'SET_ENTRIES', entries: fixtureData.SampleResults },
       { type: 'END_LOADING' },
     ];
 
@@ -54,7 +54,7 @@ describe('reducer', () => {
 
     expect(finalState).to.equal(fromJS({
       loading: false,
-      entries: fixtureData
+      entries: fixtureData.SampleResults
     }));
   });
 });
