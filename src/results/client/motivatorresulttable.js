@@ -28,14 +28,14 @@ class MotivatorResultsTable extends React.Component {
 
 MotivatorResultsTable.propTypes = {
   loading: React.PropTypes.bool,
-  results: React.PropTypes.array,
+  entries: React.PropTypes.array,
   motivators: React.PropTypes.array,
   lang: React.PropTypes.string,
 };
 
 MotivatorResultsTable.defaultProps = {
   loading: false,
-  results: [],
+  entries: [],
   motivators: [],
   lang: 'HU',
 };
