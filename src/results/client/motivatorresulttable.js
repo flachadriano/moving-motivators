@@ -6,10 +6,9 @@ import Spinner from './spinner';
 
 class MotivatorResultsTable extends React.Component {
   render() {
-    return (
-      <div>
-        <Spinner show={this.props.loading}/>
-        <table className="table table-condensed table-striped table-bordered table-hover">
+    const content = this.props.loading
+      ? <Spinner />
+      : <table className="table table-condensed table-striped table-bordered table-hover">
           <thead>
             <tr>
               <th>Email</th>
@@ -20,7 +19,11 @@ class MotivatorResultsTable extends React.Component {
             {this.props.entries.map(result =>
               <MotivatorResult key={result.email} data={result} motivators={this.props.motivators} />)}
           </tbody>
-        </table>
+        </table>;
+
+    return (
+      <div>
+        { content }
       </div>
     );
   }
