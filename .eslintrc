@@ -1,9 +1,12 @@
 {
   "extends": "airbnb",
   "rules": {
-      "func-names": 0,
-      "comma-dangle": 0,
-      "max-len": 0,
-      "new-cap": 0,
+    "func-names": 0,
+    "comma-dangle": 0,
+    "max-len": 0,
+    "new-cap": 0,
+  },
+  "env": {
+    "mocha": true
   }
 }
