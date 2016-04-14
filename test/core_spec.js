@@ -1,23 +1,23 @@
 import { Map, fromJS } from 'immutable';
 import { expect } from 'chai';
 import { setEntries, setLoading } from '../src/results/store/core';
-import { fixtureData } from './fixtures';
+import fixtureData from '../fixtures/results';
 
 describe('application logic', () => {
   describe('setEntries', () => {
     it('adds the entries to the state', () => {
       const state = Map();
-      const nextState = setEntries(state, fromJS(fixtureData));
+      const nextState = setEntries(state, fromJS(fixtureData.SampleResults));
       expect(nextState).to.equal(Map({
-        entries: fromJS(fixtureData)
+        entries: fromJS(fixtureData.SampleResults)
       }));
     });
 
     it('converts to immutable', () => {
       const state = Map();
-      const nextState = setEntries(state, fixtureData);
+      const nextState = setEntries(state, fixtureData.SampleResults);
       expect(nextState).to.equal(Map({
-        entries: fromJS(fixtureData)
+        entries: fromJS(fixtureData.SampleResults)
       }));
     });
   });
