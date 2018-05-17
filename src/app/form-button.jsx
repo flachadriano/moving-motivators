@@ -6,12 +6,17 @@ module.exports = React.createClass({
     onClick: React.PropTypes.func,
   },
   onClick() {
-    this.props.onClick();
+    this.props.onClick(this.name);
+  },
+  onChange(name) {
+    this.name = name.target.value;
   },
   render() {
     return (
       <div className="form-toggle-container">
-        <RaisedButton label="Save my motivators" primary={true} onClick={this.onClick} />
+        <span style={{color: '#000000'}}>Nome</span>
+        <input type="text" onChange={this.onChange} style={{margin: '10px'}} />
+        <RaisedButton label="Enviar dados" primary={true} onClick={this.onClick} />
       </div>
       );
   },
