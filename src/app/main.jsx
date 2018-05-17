@@ -16,35 +16,35 @@ const request = require('superagent');
 
 const cards = [
   { imageUrl: 'Acceptance.png',
-    name: 'Elfogadás',
-    description: 'Motivál, hogy a körülöttem lévő emberek elfogadnak olyannak, amilyen vagyok, és megerősítenek abban, amit csinálok.' },
+    name: 'Aceitação',
+    description: 'As pessoas ao meu redor aprovam o que eu faço e quem eu sou' },
   { imageUrl: 'Curiosity.png',
-    name: 'Kíváncsiság',
-    description: 'Motivál, hogy bár vannak monoton, esetleg unalmas feladatok, számos más dolog van, amit felfedezhetek és amin gondolkodhatok.' },
+    name: 'Curiosidade',
+    description: 'Eu tenho muitas coisas para investigar e pensar' },
   { imageUrl: 'Freedom.png',
-    name: 'Szabadság',
-    description: 'Motivál, hogy független vagyok a többiektől, megvannak a saját feladataim és felelősségem.' },
+    name: 'Liberdade',
+    description: 'Eu sou independente dos outros com meu próprio trabalho e responsabilidades' },
   { imageUrl: 'Goal.png',
-    name: 'Cél',
-    description: 'Motivál, hogy nem csupán pénzt keresek, hanem a munkámban visszatükröződnek a személyes (élet)céljaim is. Például munkámmal hozzájárulok ahhoz, hogy a világ (kicsit) jobb legyen.' },
+    name: 'Meta',
+    description: 'Meu propósito na vida é refletido no trabalho que eu faço' },
   { imageUrl: 'Honor.png',
-    name: 'Megbecsülés',
-    description: 'Motivál, hogy a személyes értékrendem megjelenik a csapat / szervezet alkotta szabályokban, ezért örömmel tartom be őket, lojális vagyok hozzájuk.' },
+    name: 'Honra',
+    description: 'Eu me sinto orgulhoso que meus valores pessoais estão refletidos em como eu trabalho' },
   { imageUrl: 'Mastery.png',
-    name: 'Szakmai kiválóság',
-    description: 'Motivál, hogy a munkám olyan kihívások elé állít, amelyek próbára teszik a szaktudásomat, de képességeimnek megfelelőek (nem érzem lehetetlennek a megoldásukat).' },
+    name: 'Maestria',
+    description: 'Meu trabalho desafia minha competência mas ainda está dentro das minhas habilidades' },
   { imageUrl: 'Order.png',
-    name: 'Rend',
-    description: 'Motivál, hogy a szervezetben elegendő előírás, szabályozás és irányelv van ahhoz, hogy kiszámítható, stabil munkakörnyezetben dolgozhassak.' },
+    name: 'Ordem',
+    description: 'Existem regras e políticas o suficiente para um ambiente estável' },
   { imageUrl: 'Power.png',
-    name: 'Hatalom',
-    description: 'Motivál, hogy lehetőségem van befolyásolni az eseményeket, amik körülöttem történnek.' },
+    name: 'Poder',
+    description: 'Há espaço o suficiente para que eu influencie o que está acontecendo em torno de mim' },
   { imageUrl: 'Relatedness.png',
-    name: 'Kötődés',
-    description: 'Motivál, hogy a körülöttem lévő emberekkel jó kapcsolatot ápolok, és a közeli ismeretségek kialakulását a céges környezet is támogatja.' },
+    name: 'Relação',
+    description: 'Eu tenho bons contatos sociais com as pessoas dentro e em torno do meu trabalho' },
   { imageUrl: 'Status.png',
-    name: 'Státusz',
-    description: 'Motivál, hogy a szervezeti hierarchiában jó pozícióban vagyok, és ezt a velem dolgozók is elismerik.' },
+    name: 'Status',
+    description: 'Minha posição é boa e reconhecida pelas outras pessoas com as quais eu trabalho;' },
 ];
 
 const motivators = [
@@ -92,11 +92,12 @@ const App = React.createClass({
       store.dispatch(motivatorOrderModified(modifiedOrder));
     });
   },
-  onSubmit(email) {
+  onSubmit(email, name) {
     const result = store.getState().motivators.map(motivator => ({
       id: motivator.id,
       name: cards[motivator.id].name,
-      priority: motivator.priority
+      priority: motivator.priority,
+      nameUser: name
     }));
 
     request
@@ -109,8 +110,9 @@ const App = React.createClass({
   toggleDebug() {
     this.setState({ debug: !this.state.debug });
   },
-  toggleForm() {
-    this.setState({ form: true });
+  toggleForm(name) {
+    // this.setState({ form: true });
+    this.onSubmit('adriano.araujo@philips.com', name)
   },
   containerClass() {
     return this.state.form ? 'big-container transitioned' : 'big-container';
