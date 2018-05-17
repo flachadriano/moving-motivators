@@ -42,7 +42,7 @@ const App = React.createClass({
 
     return (
       <div className="outer-container">
-        <div className="detail-outer-container">
+        {/* <div className="detail-outer-container">
           <div className="detail-card">
             <div className="detail-card-image">
               <img src={'cardempty/' + this.state.imageUrl}/>
@@ -52,7 +52,7 @@ const App = React.createClass({
             <div className="detail-text-header">{this.state.title}</div>
             <div className="detail-text-desc">{this.state.description}</div>
           </div>
-        </div>
+        </div> */}
         <div className="cards-outer-container">
           <div className="priority-less"><i className="material-icons">fast_rewind</i><span className="priority-less-text">Least important</span></div>
           <div className="priority-more"><i className="material-icons">fast_forward</i><span className="priority-more-text">Most important</span></div>
