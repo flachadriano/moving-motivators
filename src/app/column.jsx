@@ -3,6 +3,7 @@ import Card from './card.jsx';
 
 module.exports = React.createClass({
   propTypes: {
+    name: React.PropTypes.string,
     cardId: React.PropTypes.number,
     imageUrl: React.PropTypes.string,
     priority: React.PropTypes.number,
@@ -26,7 +27,7 @@ module.exports = React.createClass({
         <div className="column column-1" onClick={this.onUpClick} style={this.topStyle('up')}>
           <i className="material-icons">keyboard_arrow_up</i>
         </div>
-        <Card priority={this.props.priority} cardId={this.props.cardId} imageUrl={this.props.imageUrl} onSelect={this.props.onSelect} key={this.props.cardId}/>
+        <Card name={this.props.name} priority={this.props.priority} cardId={this.props.cardId} imageUrl={this.props.imageUrl} onSelect={this.props.onSelect} key={this.props.cardId}/>
         <div className="column column-3" onClick={this.onDownClick} style={this.topStyle('down')}>
           <i className="material-icons">keyboard_arrow_down</i>
         </div>

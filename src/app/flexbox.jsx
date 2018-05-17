@@ -31,6 +31,7 @@ const App = React.createClass({
     const cardNodes = this.props.state.motivators.map((motivator) => {
       return React.createElement(Column,
         { key: motivator.id,
+          name: this.props.state.cards[motivator.id].name,
           priority: motivator.priority,
           imageUrl: this.props.state.cards[motivator.id].imageUrl,
           onSelect: this.cardSelected,
