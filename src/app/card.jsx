@@ -23,7 +23,6 @@ module.exports = React.createClass({
         <div className="inside inside-up" style={this.calculatePriorityStyle('up')}></div>
         <div className="inside inside-img">
           <img className="col-image" src={'card/' + this.props.imageUrl} onClick={this.onClick}/>
-          <span style={{color: '#000000'}}>{this.props.name}</span>
         </div>
         <div className="inside inside-down" style={this.calculatePriorityStyle('down')}></div>
       </div>
